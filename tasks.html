@@ -9,11 +9,20 @@
   
   {{> AddTask}}
   
-  <div id="tasks" class="row pull-left col-md-12">{{> Tasks}}</div>
+  <div id="tasks" class="row pull-left">{{> Tasks}}</div>
+  
+  {{> Buckets }}
   
   <footer class="row col-md-12 text-muted">Made by <a href="http://liamz.co">@liamzebedee</a></footer>
   </article>
 </body>
+
+<template name="Buckets">
+  <section id="buckets">
+  	<span class="bucket done-bucket glyphicon glyphicon-check"></span>
+  	<span class="bucket remove-bucket glyphicon glyphicon-remove"></span>
+  </section>
+</template>
 
 <template name="TaskStats">
 	<span>{{ numberIncomplete }} left, {{ numberComplete }} complete</span>
@@ -41,17 +50,39 @@
 </template>
 
 <template name="Tasks">
-{{#each all}}
-	<article class="col-md-12 task pull-left" task-id={{ _id }}>
-		<h3>
-			<div class="left">
-				<span class="pull-left control-done"><a class="glyphicon glyphicon-check"></a></span>
-			</div>
-			<div class="right"> 
-				<span>{{ description }}</span><br>
-				<small>{{ getUrgency urgency}} {{ getImportance importance }}</small>
-			</div>
-		</h3>
-	</article>
+<section class="row">
+<h2 class="text-muted">Urgent + Important</h2>
+{{#each allUrgentAndImportant}}
+	{{> Task }}
 {{/each}}
+</section>
+
+<section class="row">
+<h2 class="text-muted">Important</h2>
+{{#each allImportant}}
+	{{> Task }}
+{{/each}}
+</section>
+
+<section class="row">
+<h2 class="text-muted">Urgent</h2>
+{{#each allUrgent}}
+	{{> Task }}
+{{/each}}
+</section>
+
+<section class="row">
+<h2 class="text-muted">Others</h2>
+{{#each allOthers}}
+	{{> Task }}
+{{/each}}
+</section>
+</template>
+
+<template name="Task">
+	<div draggable="true" class="row col-md-3 task pull-left" task-id={{ _id }}>
+		<h3>
+			{{ description }}
+		</h3>
+	</div>
 </template>

@@ -1,15 +1,31 @@
 /* CSS declarations go here */
 @import "bootstrap.min.css";
 
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+#buckets {
+	position: fixed;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    font-size: 28px;
+}
+
+.task { cursor: move; }
+
 footer {
 	margin-top: 5em;
 }
 
-.control-done {
-	margin-right: 1em;
-}
-
-.control-done a:hover {
+.bucket a:hover {
 	cursor: pointer;
 	text-decoration: none;
 	font-weight: bold;
@@ -21,5 +37,34 @@ footer {
 }
 .task h3 .right {
 	display: block;
-	float: left;
+	
+}
+
+
+
+/* For the jiggles */
+.jiggly {
+    -webkit-animation: jiggle 0.2s infinite;
+    -moz-animation-duration: 0.2s;
+    -moz-animation-name: jiggle;
+    -moz-animation-iteration-count: infinite;
+    -webkit-transform: rotate(-1deg);
+    -moz-transform: rotate(-1deg);
+}
+@-moz-keyframes jiggle {
+    0% {
+        -moz-transform: rotate(-1deg);
+}
+50% {
+    -moz-transform: rotate(1deg);
+}
+}
+
+@-webkit-keyframes jiggle {
+    0% {
+        -webkit-transform: rotate(-1deg);
+}
+50% {
+    -webkit-transform: rotate(1deg);
+}
 }
