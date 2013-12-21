@@ -1,0 +1,55 @@
+<head>
+  <title>Tasks</title>
+  <script src='js/bootstrap.min.js'></script>
+</head>
+
+<body>
+  <article class="container">
+  <h1 class="page-header">Tasks</h1>
+  
+  {{> AddTask}}
+  
+  <table class="pull-left">
+  	<tr class="row">
+  	  <th class="col-md-5">Description</th>
+  	  <th class="col-md-2">Urgency</th>
+  	  <th class="col-md-2">Importance</th>
+  	  <th class="col-md-1">Done?</th>
+  	</tr>
+  	
+  	{{> Tasks}}
+  </table>
+  </article>
+</body>
+
+<template name="AddTask">
+	<form id="AddTask" class="form-inline row" role="form">
+		<div class="form-group col-md-7">
+			<input type="text" class="form-control" id="description" placeholder="Describe the task">
+		</div>
+		<div class="form-group">
+			<select class="form-control" id="urgency">
+				<option value=1>Urgent</option>
+				<option value=0>Not urgent</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select class="form-control" id="importance">
+				<option value=1>Important</option>
+				<option value=0>Not important</option>
+			</select>
+		</div>
+		<button type="button" class="btn btn-primary" id="add">Add</button>
+	</form>
+</template>
+
+<template name="Tasks">
+{{#each all}}
+	<tr class="row task" task-id={{ _id }}>
+		<td class="col-md-5">{{ description }}</td>
+		<td class="col-md-2" urgent={{ urgency}}>{{ getUrgency urgency }}</td>
+		<td class="col-md-2" important={{ importance }}>{{ getImportance importance }}</td>
+		<td class="col-md-1 control-done"><a class="glyphicon glyphicon-check"></a></td>
+	</tr>
+{{/each}}
+</template>
