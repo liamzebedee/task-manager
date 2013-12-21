@@ -1,15 +1,25 @@
 /* CSS declarations go here */
 @import "bootstrap.min.css";
 
-#AddTask {
-	margin-bottom: 2em;
+footer {
+	margin-top: 5em;
 }
 
 .control-done {
-	text-align: center;
+	margin-right: 1em;
 }
+
 .control-done a:hover {
 	cursor: pointer;
 	text-decoration: none;
 	font-weight: bold;
+}
+
+.task h3 .left {
+	display: block;
+	float: left;
+}
+.task h3 .right {
+	display: block;
+	float: left;
 }

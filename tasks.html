@@ -4,26 +4,23 @@
 </head>
 
 <body>
-  <article class="container">
-  <h1 class="page-header">Tasks</h1>
+  <article id="container" class="container">
+  <h1 class="page-header">Tasks <small>{{> TaskStats }}</small></h1>
   
   {{> AddTask}}
   
-  <table class="pull-left">
-  	<tr class="row">
-  	  <th class="col-md-5">Description</th>
-  	  <th class="col-md-2">Urgency</th>
-  	  <th class="col-md-2">Importance</th>
-  	  <th class="col-md-1">Done?</th>
-  	</tr>
-  	
-  	{{> Tasks}}
-  </table>
+  <div id="tasks" class="row pull-left col-md-12">{{> Tasks}}</div>
+  
+  <footer class="row col-md-12 text-muted">Made by <a href="http://liamz.co">@liamzebedee</a></footer>
   </article>
 </body>
 
+<template name="TaskStats">
+	<span>{{ numberIncomplete }} left, {{ numberComplete }} complete</span>
+</template>
+
 <template name="AddTask">
-	<form id="AddTask" class="form-inline row" role="form">
+	<div id="AddTask" class="form-inline row" role="form">
 		<div class="form-group col-md-7">
 			<input type="text" class="form-control" id="description" placeholder="Describe the task">
 		</div>
@@ -40,16 +37,21 @@
 			</select>
 		</div>
 		<button type="button" class="btn btn-primary" id="add">Add</button>
-	</form>
+	</div>
 </template>
 
 <template name="Tasks">
 {{#each all}}
-	<tr class="row task" task-id={{ _id }}>
-		<td class="col-md-5">{{ description }}</td>
-		<td class="col-md-2" urgent={{ urgency}}>{{ getUrgency urgency }}</td>
-		<td class="col-md-2" important={{ importance }}>{{ getImportance importance }}</td>
-		<td class="col-md-1 control-done"><a class="glyphicon glyphicon-check"></a></td>
-	</tr>
+	<article class="col-md-12 task pull-left" task-id={{ _id }}>
+		<h3>
+			<div class="left">
+				<span class="pull-left control-done"><a class="glyphicon glyphicon-check"></a></span>
+			</div>
+			<div class="right"> 
+				<span>{{ description }}</span><br>
+				<small>{{ getUrgency urgency}} {{ getImportance importance }}</small>
+			</div>
+		</h3>
+	</article>
 {{/each}}
 </template>
